@@ -1,0 +1,28 @@
+void forca_bruta(int cor)
+{
+    int corA = 1;
+    //cores[0] = corA;
+    for(int i = 0; i < MAX; i++)for(int j = i + 1; j < MAX; j++)
+    {
+        if(cores[i] == 0)cores[i] = 1;
+        //if(i == j)j++;
+        if(grafo[i][j] == 1 && cores[j] == 0)
+        {
+            if(cores[i] != 1)cores[j] = 1;
+            else cores[j] = 2;
+            for(int k = 0; k < MAX; k++)if(grafo[j][k] == 1 && cores[j] == cores[k])
+            {
+                k = 0;
+                cores[j]++;
+            }
+        }
+        if(cores[j] > cor)
+        {
+            i = j = MAX;
+            zera_cores();
+            cor++;
+            forca_bruta(cor);
+        }
+    }
+    //if(i < MAX * MAX)return
+}
